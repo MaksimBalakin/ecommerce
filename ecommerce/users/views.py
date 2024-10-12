@@ -4,6 +4,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import LoginForm, CustomUserCreationForm
 
+def home(request):
+    return render(request, 'users/home.html')
+
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
