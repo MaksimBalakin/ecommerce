@@ -53,6 +53,6 @@ def profile_view(request):
         form = UserProfileForm(request.POST, instance=user)
         if form.is_valid():
             form.save()  # Save the updated user info
-            return redirect('profile')  # Redirect to the profile page after saving
+            return redirect('home')  # Change this to redirect to the home page after saving
     
     return render(request, 'users/profile.html', {'form': form})  # Render the profile template
