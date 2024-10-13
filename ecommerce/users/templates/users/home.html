@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
     <h1>Welcome to the home page!</h1>
     {% if user.is_authenticated %}
         <p>You are currently logged in as {{ user.username }}.</p>
         <p><a href="{% url 'profile' %}">View your profile</a></p>
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit">Logout</button>
+            <button type="submit" class="btn btn-danger">Logout</button>  <!-- Optional Bootstrap button style -->
         </form>
     {% else %}
         <p>If you haven't already, please <a href="{% url 'login' %}">log in</a> or <a href="{% url 'register' %}">register</a>.</p>
     {% endif %}
-</body>
-</html>
-
+{% endblock %}
