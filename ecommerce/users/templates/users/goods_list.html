@@ -3,17 +3,21 @@
 {% block title %}Goods List{% endblock %}
 
 {% block content %}
-<h1>Goods</h1>
-<div style="display: flex; flex-wrap: wrap;">
-    {% for good in goods %}
-        <div style="margin: 10px; border: 1px solid #ccc; padding: 10px; width: 200px;">
-            <h2>{{ good.name }}</h2>
-            <p>{{ good.description }}</p>
-            <p>Price: {{ good.price }}</p>
-            {% if good.image %}
-                <img src="{{ good.image.url }}" alt="{{ good.name }}" style="width: 100%;">
-            {% endif %}
-        </div>
-    {% endfor %}
-</div>
+    <h1>Goods</h1>
+    <div class="grid-container">
+        {% for good in goods %}
+            <div class="grid-item">
+                <img src="{{ good.image.url }}" alt="{{ good.name }}" style="width:100%;">
+                <h3>{{ good.name }}</h3>
+                <p>{{ good.description }}</p>
+                <p>Price: ${{ good.price }}</p>
+            </div>
+        {% empty %}
+            <p>No goods available.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 {% endblock %}
