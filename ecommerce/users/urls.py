@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.views import PasswordChangeView
-from .views import add_good_view
+from .views import add_good
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -11,7 +13,9 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('profile/', views.profile_view, name='profile'),
     path('profile/password/', PasswordChangeView.as_view(), name='password_change'),
-    path('add/', add_good_view, name='add_good'),
+    path('add/', views.add_good, name='add_good'),
+    
     
 ]
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

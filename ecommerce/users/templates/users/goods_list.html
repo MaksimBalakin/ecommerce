@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Goods List{% endblock %}
+
+{% block content %}
+<h1>Goods</h1>
+<div style="display: flex; flex-wrap: wrap;">
+    {% for good in goods %}
+        <div style="margin: 10px; border: 1px solid #ccc; padding: 10px; width: 200px;">
+            <h2>{{ good.name }}</h2>
+            <p>{{ good.description }}</p>
+            <p>Price: {{ good.price }}</p>
+            {% if good.image %}
+                <img src="{{ good.image.url }}" alt="{{ good.name }}" style="width: 100%;">
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

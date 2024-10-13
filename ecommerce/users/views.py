@@ -7,8 +7,14 @@ from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, CustomUserCreationForm, GoodForm, UserProfileForm
 from .models import Good
 
+# def home(request):
+#     return render(request, 'users/home.html')
+
 def home(request):
-    return render(request, 'users/home.html')
+    goods = Good.objects.all()  # Fetch all goods from the database
+    return render(request, 'users/home.html', {'goods': goods})
+
+
 
 def register(request):
     if request.method == 'POST':
@@ -60,18 +66,21 @@ def profile_view(request):
 
 
 
-def home_view(request):
-    goods = Good.objects.all()  # Fetch all goods from the database
-    return render(request, 'home.html', {'goods': goods})
 
 
+from django.shortcuts import render, redirect
+from .forms import GoodForm
+from .models import Good
 
-def add_good_view(request):
+def add_good(request):
     if request.method == 'POST':
         form = GoodForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('home')  # Redirect to the homepage
     else:
         form = GoodForm()
-    return render(request, 'add_good.html', {'form': form})
+    return render(request, 'users/add_good.html', {'form': form})
+def goods_list(request):
+    goods = Good.objects.all()
+    return render(request, 'users/oods_list.html', {'goods': goods})
