@@ -3,8 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserProfileForm
-from .forms import LoginForm, CustomUserCreationForm
+
+from .forms import LoginForm, CustomUserCreationForm, GoodForm, UserProfileForm
+from .models import Good
 
 def home(request):
     return render(request, 'users/home.html')
@@ -56,3 +57,21 @@ def profile_view(request):
             return redirect('home')  # Change this to redirect to the home page after saving
     
     return render(request, 'users/profile.html', {'form': form})  # Render the profile template
+
+
+
+def home_view(request):
+    goods = Good.objects.all()  # Fetch all goods from the database
+    return render(request, 'home.html', {'goods': goods})
+
+
+
+def add_good_view(request):
+    if request.method == 'POST':
+        form = GoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = GoodForm()
+    return render(request, 'add_good.html', {'form': form})

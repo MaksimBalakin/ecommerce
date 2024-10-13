@@ -2,6 +2,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 from django import forms
 
+from .models import Good
+
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -17,3 +19,9 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ['first_name', 'last_name', 'email', 'address']  # Include fields you want to edit
+
+
+class GoodForm(forms.ModelForm):
+    class Meta:
+        model = Good
+        fields = ['name', 'description', 'price', 'image']
