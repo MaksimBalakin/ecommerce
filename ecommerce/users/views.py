@@ -72,11 +72,14 @@ from django.shortcuts import render, redirect
 from .forms import GoodForm
 from .models import Good
 
+@login_required
 def add_good(request):
     if request.method == 'POST':
         form = GoodForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            good = form.save(commit=False)  # Do not save to the database yet
+            good.creator = request.user  # Set the creator to the currently logged-in user
+            good.save()  # Now save it
             return redirect('home')  # Redirect to the homepage
     else:
         form = GoodForm()

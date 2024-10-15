@@ -11,12 +11,14 @@
                 <h3>{{ good.name }}</h3>
                 <p>{{ good.description }}</p>
                 <p>Price: ${{ good.price }}</p>
+                <p>Added by: {{ good.user.username }}</p>  <!-- Display the username -->
             </div>
         {% empty %}
             <p>No goods available.</p>
         {% endfor %}
     </div>
 {% endblock %}
+
 
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
