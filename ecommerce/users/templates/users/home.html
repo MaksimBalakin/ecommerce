@@ -15,16 +15,20 @@
     {% else %}
         <p>If you haven't already, please <a href="{% url 'login' %}">log in</a> or <a href="{% url 'register' %}">register</a>.</p>
     {% endif %}
-
+ 
 <h2>Available Goods</h2>
 <div class="grid-container">
     {% for good in goods %}
         <div class="grid-item">
             <img src="{{ good.image.url }}" alt="{{ good.name }}" style="width:100%;">
             <h3>{{ good.name }}</h3>
-            <div> @{{ good.creator.username }}</div>p>
+            <div> @{{ good.creator.username }}</div>
             <p>{{ good.description }}</p>
             <p>Price: ${{ good.price }}</p>
+            {% if user.is_authenticated and user == good.creator %}
+                <a href="{% url 'edit_good' good.id %}">Edit</a>
+                <a href="{% url 'delete_good' good.id %}">Delete</a>
+            {% endif %}
         </div>
     {% empty %}
         <p>No goods available.</p>

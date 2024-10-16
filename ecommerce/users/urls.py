@@ -14,7 +14,8 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('profile/password/', PasswordChangeView.as_view(), name='password_change'),
     path('add/', views.add_good, name='add_good'),
-    
+    path('edit/<int:good_id>/', views.edit_good, name='edit_good'),
+    path('delete/<int:good_id>/', views.delete_good, name='delete_good'),
     
 ]
 
