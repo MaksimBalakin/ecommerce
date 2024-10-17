@@ -1,23 +1,46 @@
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-columns: repeat(6, minmax(250px, 1fr)); /* 3 columns with a minimum of 250px */
     grid-gap: 20px; /* gap between grid items */
     padding: 20px;
 }
 
 .grid-item {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    flex-direction: column; /* Align children in a column */
+    align-items: center; /* Center align items horizontally */
+    justify-content: flex-end; /* Align content to the bottom */
+    padding: 10px; /* Minimal padding */
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center text for a uniform look */
+    position: relative; /* Positioning context */
 }
 
 .grid-item img {
-    max-width: 100%; /* add this line */
-    height: 200px; /* adjust the height as needed */
-    object-fit: cover; /* scale the image to cover the grid item */
-    border-radius: 10px;
+    width: 100%; /* Full width of the card */
+    height: auto; /* Maintain aspect ratio */
+    aspect-ratio: 1/1; /* Ensure the image is always a square */
+    object-fit: cover; /* Scale the image to cover the grid item */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 10px; /* Space between image and text */
 }
+
+.grid-item h3 {
+    margin: 0; /* Remove margins for a cleaner look */
+    font-size: 18px; /* Adjust font size */
+    font-weight: bold; /* Make price bold */
+}
+
+.grid-item p {
+    margin: 5px 0; /* Space around text */
+    font-size: 14px; /* Smaller font size */
+    line-height: 1.2; /* Adjust line height for tight spacing */
+    color: grey; /* Grey color for username */
+}
+
+.btn {
+    margin: 5px 0; /* Margin for buttons */
+}
+
