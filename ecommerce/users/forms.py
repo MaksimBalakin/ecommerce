@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 from django import forms
 
-from .models import Good
+from .models import Good, validate_image_square
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -21,7 +21,17 @@ class UserProfileForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'email', 'address']  # Include fields you want to edit
 
 
+
 class GoodForm(forms.ModelForm):
     class Meta:
         model = Good
         fields = ['name', 'description', 'price', 'image']
+        
+        
+    def clean_image(self):
+        image = self.cleaned_data.get('image')
+        validate_image_square(image)
+        return image
+
+
+
