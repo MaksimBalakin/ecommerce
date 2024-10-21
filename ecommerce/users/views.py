@@ -4,8 +4,12 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginForm, CustomUserCreationForm, GoodForm, UserProfileForm
-from .models import Good
+from .forms import LoginForm, CustomUserCreationForm, UserProfileForm
+from shop.forms import GoodForm
+from shop.models import Good
+
+from django.shortcuts import render, redirect
+
 
 # def home(request):
 #     return render(request, 'users/home.html')
@@ -68,9 +72,7 @@ def profile_view(request):
 
 
 
-from django.shortcuts import render, redirect
-from .forms import GoodForm
-from .models import Good
+
 
 @login_required
 def add_good(request):
