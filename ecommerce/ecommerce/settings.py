@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+CART_SESSION_ID = 'cart'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    
 ]
 AUTH_USER_MODEL = 'users.CustomUser'
 
@@ -68,10 +71,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart'
             ],
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'ecommerce.wsgi.application'
 

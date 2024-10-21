@@ -1,7 +1,7 @@
 # cart/cart.py
 from decimal import Decimal
 from django.conf import settings
-from ecommerce.users.models import Good  # Adjust the import to match your Good model location
+from shop.models import Good  
 
 class Cart:
     def __init__(self, request):

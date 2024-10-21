@@ -7,23 +7,29 @@
 
 <h2>Available Goods</h2>
 <div class="grid-container">
-    {% for good in goods %}
-        <div class="grid-item">
-            <img src="{{ good.image.url }}" alt="{{ good.name }}" style="width:100%;">
+    <!-- ecommerce/users/templates/users/home.html -->
 
-            <h3>${{ good.price }}</h3>
-            <p><span style="color:grey;">{{ good.creator.username }}</span> | {{ good.name }}</p>
-            {% if user.is_authenticated and user == good.creator %}
-                <div style="display: flex; justify-content: center; position: absolute; bottom: 5px; right: 5px; font-size: 0.8em;">
-                    <a href="{% url 'edit_good' good.id %}" class="btn btn-outline-warning btn-sm mx-1 p-1">✏️<i class="bi bi-pencil"></i></a>
-                    <a href="{% url 'delete_good' good.id %}" class="btn btn-outline-danger btn-sm mx-1 p-1">❌<i class="bi bi-trash"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    {% empty %}
-        <p>No goods available.</p>
-    {% endfor %}
+    {% for good in goods %}
+    <div class="grid-item">
+        <img src="{{ good.image.url }}" alt="{{ good.name }}" style="width:100%;">
+
+        <h3>${{ good.price }}</h3>
+        <p><span style="color:grey;">{{ good.creator.username }}</span> | {{ good.name }}</p>
+        {% if request.user == good.creator %}
+            <p>
+                <a href="{% url 'edit_good' good.id %}">Edit</a> |
+                <a href="{% url 'delete_good' good.id %}">Delete</a>
+            </p>
+        {% endif %}
+        <form action="{% url 'cart:cart_add' good.id %}" method="post">
+            {% csrf_token %}
+            <input type="number" name="quantity" value="1" min="1" max="10">
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+{% endfor %}
 </div>
 {% endblock %}
+
 
 
