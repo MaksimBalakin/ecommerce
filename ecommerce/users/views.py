@@ -1,5 +1,5 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -118,3 +118,7 @@ def delete_good(request, good_id):
 def goods_list(request):
     goods = Good.objects.all()
     return render(request, 'users/oods_list.html', {'goods': goods})
+
+def good_detail(request, pk):
+    good = get_object_or_404(Good, pk=pk)
+    return render(request, 'users/good_detail.html', {'good': good})
