@@ -5,7 +5,7 @@ from django.contrib.auth.views import PasswordChangeView
 from shop.views import add_good
 from django.conf import settings
 from django.conf.urls.static import static
-from shop.views import save_cropped_image
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -17,8 +17,7 @@ urlpatterns = [
     path('add/', shop_views.add_good, name='add_good'),
     path('edit/<int:good_id>/', shop_views.edit_good, name='edit_good'),
     path('delete/<int:good_id>/', shop_views.delete_good, name='delete_good'),
-    path('goods/<int:pk>/', shop_views.good_detail, name='good_detail'),
-    path('save-cropped-image/', save_cropped_image, name='save_cropped_image')
+    path('goods/<int:pk>/', shop_views.good_detail, name='good_detail')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

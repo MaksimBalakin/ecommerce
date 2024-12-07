@@ -65,23 +65,3 @@ from PIL import Image
 import io
 import base64
 
-def save_cropped_image(request):
-    if request.method == "POST":
-        try:
-            # Extract base64 image data from request
-            image_data = request.POST.get("cropped_image")
-            format, imgstr = image_data.split(';base64,')
-            ext = format.split('/')[-1]
-            image_data = base64.b64decode(imgstr)
-
-            # Save the image using PIL
-            img = Image.open(io.BytesIO(image_data))
-            img = img.convert("RGB")  # Ensure it's in RGB format
-            image_path = "media/cropped_image.jpg"
-            img.save(image_path)
-
-            return JsonResponse({"message": "Image saved successfully", "image_url": image_path})
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=400)
-    return JsonResponse({"error": "Invalid request"}, status=400)
-
