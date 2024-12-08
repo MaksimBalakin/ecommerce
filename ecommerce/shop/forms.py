@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Good, validate_image_square
+from .models import Good
 
 
 class GoodForm(forms.ModelForm):
@@ -11,6 +11,6 @@ class GoodForm(forms.ModelForm):
         
     def clean_image(self):
         image = self.cleaned_data.get('image')
-        validate_image_square(image)
+        
         return image
 

@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 from django import forms
 
-from shop.models import Good, validate_image_square
+from shop.models import Good
 
 
 
